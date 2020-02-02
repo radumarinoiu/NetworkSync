@@ -1,12 +1,18 @@
 import json
-from pymongo import MongoClient
-from bson.objectid import ObjectId
 
-with open("logins.json", "rb") as f:
-    logins = json.load(f)
 
-client = MongoClient("mongodb://{}:{}@{}/admin".format(logins["db user"], logins["db pass"], logins["db host"]))
-db = client["online-ide"]
-vms_coll = db["vms"]
-users_coll = db["users"]
-installers_coll = db["installers"]
+class Database(object):
+    def __init__(self):
+        with open("logins.json", "rb") as f:
+            credentials = json.load(f)
+        self.connect(credentials)
+        del credentials
+
+    def connect(self, credentials):
+        pass
+
+    def disconnect(self):
+        pass
+
+    def __del__(self):
+        self.disconnect()
