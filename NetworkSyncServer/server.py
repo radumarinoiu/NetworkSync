@@ -21,9 +21,9 @@ def upload_file(upload_token):
 
 @app.route('/download_file/<download_token>', methods=["GET"])
 def download_file(download_token):
-
     print("Download token: {}".format(download_token))
-    return jsonify({"token": download_token})
+    filename = "krita-4.2.8-x86_64.appimage"
+    return send_file(os.path.join(UPLOAD_FOLDER, filename)), 200
 
 
 if __name__ == '__main__':
